@@ -9,4 +9,9 @@ const Container = styled.div`
   margin-top: 10vh;
 `;
 
-export { Container };
+const Img = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
+export { Container, Img };

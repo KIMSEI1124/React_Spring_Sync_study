@@ -4,11 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import spring.api.board.dto.request.ContentRequest;
 import spring.api.board.domain.Board;
-import spring.api.board.repository.BoardRepository;
+import spring.api.board.dto.request.ContentRequest;
 import spring.api.board.dto.response.BoardResponse;
 import spring.api.board.dto.response.BoardsResponse;
+import spring.api.board.repository.BoardRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +21,11 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     @Transactional
-    public void save(BoardResponse dto) {
+    public void save(BoardResponse response) {
         boardRepository.save(Board.builder()
-                .title(dto.getTitle())
-                .content(dto.getContent())
+                .title(response.getTitle())
+                .content(response.getContent())
+                .image(response.getImage())
                 .build());
     }
 
@@ -34,6 +35,7 @@ public class BoardService {
                 .id(result.getId())
                 .title(result.getTitle())
                 .content(result.getContent())
+                .image(result.getImage())
                 .build();
     }
 

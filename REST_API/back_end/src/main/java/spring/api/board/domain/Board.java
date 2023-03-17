@@ -1,10 +1,7 @@
 package spring.api.board.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Getter
@@ -19,10 +16,14 @@ public class Board {
 
     private String content;
 
+    @Embedded
+    private Image image;
+
     @Builder
-    public Board(String title, String content) {
+    public Board(String title, String content, Image image) {
         this.title = title;
         this.content = content;
+        this.image = image;
     }
 
     public void changeContent(String content) {
