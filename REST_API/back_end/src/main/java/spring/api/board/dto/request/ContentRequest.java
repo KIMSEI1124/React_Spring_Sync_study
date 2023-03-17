@@ -1,4 +1,4 @@
-package spring.api.board.controller.dto.request;
+package spring.api.board.dto.request;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

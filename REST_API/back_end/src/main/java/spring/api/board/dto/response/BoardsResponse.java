@@ -1,4 +1,4 @@
-package spring.api.board.service.dto;
+package spring.api.board.dto.response;
 
 import lombok.Builder;
 import lombok.Data;
@@ -6,12 +6,12 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class BoardsRequest {
+public class BoardsResponse {
     private int count;
-    private List<BoardRequest> boards;
+    private List<BoardResponse> boards;
 
     @Builder
-    public BoardsRequest(int count, List<BoardRequest> boards) {
+    public BoardsResponse(int count, List<BoardResponse> boards) {
         this.count = count;
         this.boards = boards;
     }

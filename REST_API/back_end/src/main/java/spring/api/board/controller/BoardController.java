@@ -4,10 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import spring.api.board.controller.dto.request.ContentRequest;
+import spring.api.board.dto.request.ContentRequest;
 import spring.api.board.service.BoardService;
-import spring.api.board.service.dto.BoardRequest;
-import spring.api.board.service.dto.BoardsRequest;
+import spring.api.board.dto.response.BoardResponse;
+import spring.api.board.dto.response.BoardsResponse;
 
 @Slf4j
 @AllArgsConstructor
@@ -18,20 +18,20 @@ public class BoardController {
     private final BoardService boardService;
 
     @PostMapping("/board")
-    public ResponseEntity<Void> post(@RequestBody BoardRequest request) {
+    public ResponseEntity<Void> post(@RequestBody BoardResponse request) {
         log.info("title = " + request.getTitle() + "content = " + request.getContent());
         boardService.save(request);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/board/{id}")
-    public ResponseEntity<BoardRequest> get(@PathVariable("id") Long id) {
-        BoardRequest data = boardService.getOne(id);
+    public ResponseEntity<BoardResponse> get(@PathVariable("id") Long id) {
+        BoardResponse data = boardService.getOne(id);
         return ResponseEntity.ok(data);
     }
 
     @GetMapping("/boards")
-    public ResponseEntity<BoardsRequest> getAll() {
+    public ResponseEntity<BoardsResponse> getAll() {
         return ResponseEntity.ok(boardService.getAll());
     }
 

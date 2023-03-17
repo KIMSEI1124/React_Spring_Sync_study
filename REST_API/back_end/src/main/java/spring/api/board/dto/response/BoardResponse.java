@@ -1,16 +1,16 @@
-package spring.api.board.service.dto;
+package spring.api.board.dto.response;
 
 import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class BoardRequest {
+public class BoardResponse {
     private Long id;
     private String title;
     private String content;
 
     @Builder
-    public BoardRequest(Long id, String title, String content) {
+    public BoardResponse(Long id, String title, String content) {
         this.id = id;
         this.title = title;
         this.content = content;
