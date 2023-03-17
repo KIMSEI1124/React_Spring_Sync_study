@@ -8,8 +8,9 @@ import Loading from "./pages/Loading";
 function App() {
   return (
     <Router>
-      <Routes />
-      <Suspense fallback={<Loading />} />
+      <Suspense fallback={<Loading />}>
+        <Routes />
+      </Suspense>
     </Router>
   );
 }

@@ -1,47 +1,45 @@
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
-import React, { useState } from "react";
-import { API_PATH } from "../../constants/path";
 
 import * as S from "./index.styled";
+import { API_PATH, BROWSER_PATH } from "../../constants/path";
+import { Link, useParams } from "react-router-dom";
 
-// https://jsonplaceholder.typicode.com/
-function Board() {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+function Boards() {
+  const [data, setData] = useState({});
+  const params = useParams();
 
-  const getTitle = (e) => {
-    setTitle(e.target.value);
-  };
-
-  const getContent = (e) => {
-    setContent(e.target.value);
-  };
-
-  const requestAddBoard = (title, content) => {
-    axios
-      .post(API_PATH.POST, {
-        title: title,
-        content: content,
-      })
+  const requestBoards = useCallback(async () => {
+    await axios
+      .get(`${API_PATH.BOARD}/${params.id}`)
       .then((response) => {
-        console.log(response.data);
+        setData(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
-    setTitle("");
-    setContent("");
-  };
+  }, [params]);
+
+  useEffect(() => {
+    requestBoards();
+  }, [requestBoards]);
 
   return (
     <S.Container>
       <h1>Board</h1>
-      <input type={"text"} placeholder={"title"} onChange={getTitle}></input>
-      <input type={"text"} placeholder={"content"} onChange={getContent}></input>
-      <button type={"submit"} onClick={() => requestAddBoard(title, content)}>
-        전송
+      <p>id : {data.id}</p>
+      <p>title : {data.title}</p>
+      <p>content : {data.content}</p>
+      <button>
+        <Link to={BROWSER_PATH.BASE}>HOME</Link>
+      </button>
+      <button>
+        <Link to={BROWSER_PATH.BOARDS}>BOARDS</Link>
+      </button>
+      <button>
+        <Link to={`${BROWSER_PATH.UPDATE_BOARD}/${params.id}`}>수정</Link>
       </button>
     </S.Container>
   );
 }
-export default Board;
+export default Boards;

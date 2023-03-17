@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import spring.api.board.service.dto.BoardDto;
+import spring.api.board.service.dto.BoardRequest;
 
 @SpringBootTest
 class BoardServiceTest {
@@ -15,13 +15,13 @@ class BoardServiceTest {
     @Test
     void saveAndGetTest() {
         // given
-        BoardDto dto = BoardDto.builder()
+        BoardRequest dto = BoardRequest.builder()
                 .title("제목")
                 .content("내용")
                 .build();
         // when
         boardService.save(dto);
-        BoardDto result = boardService.getOne(1L);
+        BoardRequest result = boardService.getOne(1L);
         // then
         Assertions.assertThat(result.getTitle()).isEqualTo("제목");
         Assertions.assertThat(result.getContent()).isEqualTo("내용");
